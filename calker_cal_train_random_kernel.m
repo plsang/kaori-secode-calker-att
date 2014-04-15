@@ -38,7 +38,7 @@ function calker_cal_train_random_kernel(proj_name, exp_name, ker)
 		
 		ridx = ridx(1:ker.randim);
 		randidx_Path = sprintf('%s/r-kernels/%s/%d/%s.randindex.r%d.mat', calker_exp_dir, ker.dev_pat, ker.randim, ker.devname, rr);
-		idx_save(randidx_Path, randidx_Path);
+		idx_save(randidx_Path, 'ridx');
 		
 		if ker.cross,
 			parfor jj = 1:numLog2g,
