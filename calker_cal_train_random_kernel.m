@@ -34,11 +34,15 @@ function calker_cal_train_random_kernel(proj_name, exp_name, ker)
 	
 	for rr = 1:ker.numrand,
 		
-		ridx = randperm(size(dev_hists, 1));
-		
-		ridx = ridx(1:ker.randim);
 		randidx_Path = sprintf('%s/r-kernels/%s/%d/%s.randindex.r%d.mat', calker_exp_dir, ker.dev_pat, ker.randim, ker.devname, rr);
-		idx_save(randidx_Path, 'ridx');
+		if exist(randidx_Path, 'file'),
+			ridx = load(randidx_Path, 'ridx');	
+			ridx = ridx.ridx;
+		else
+			ridx = randperm(size(dev_hists, 1));
+			ridx = ridx(1:ker.randim);
+			idx_save(randidx_Path, ridx);
+		end
 		
 		if ker.cross,
 			parfor jj = 1:numLog2g,
@@ -82,8 +86,8 @@ function par_save( output_file, ker )
 	ssave(output_file, '-STRUCT', 'ker', '-v7.3');
 end
 
-function idx_save( output_file, index )
+function idx_save( output_file, ridx )
 	output_dir = fileparts(output_file);
 	if ~exist(output_dir, 'file'), mkdir(output_dir); end;
-	save( output_file, 'index');
+	save( output_file, 'ridx');
 end

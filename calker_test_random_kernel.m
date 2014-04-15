@@ -40,7 +40,7 @@ function calker_test_random_kernel(proj_name, exp_name, ker, events)
 		
 	for rr = 1:ker.numrand,
 		
-		scorePath = sprintf('%s/scores/%d/%s/%s.r%d.scores.mat', calker_exp_dir, ker.randim, ker.test_pat, ker.name, rr);
+		scorePath = sprintf('%s/r-scores/%d/%s/%s.r%d.scores.mat', calker_exp_dir, ker.randim, ker.test_pat, ker.name, rr);
 		
 		%if checkFile(scorePath), 
 		%	error('Skipped testing %s \n', scorePath);

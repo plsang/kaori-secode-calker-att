@@ -85,8 +85,11 @@ calker_cal_train_random_kernel(proj_name, exp_name, ker);
 %calker_train_kernel(proj_name, exp_name, ker, events);
 calker_train_random_kernel(proj_name, exp_name, ker, events);
 %calker_cal_test_kernel(proj_name, exp_name, ker);
+calker_cal_test_random_kernel(proj_name, exp_name, ker);
 %calker_test_kernel(proj_name, exp_name, ker, events);
+calker_test_random_kernel(proj_name, exp_name, ker, events);
 %calker_cal_map(proj_name, exp_name, ker, events, videolevel);
+calker_cal_random_map(proj_name, exp_name, ker, events, videolevel);
 
 %calker_cal_rank(proj_name, exp_name, ker, events)
 
