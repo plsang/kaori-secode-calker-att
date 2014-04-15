@@ -1,4 +1,4 @@
-function calker_main(proj_name, exp_id, feature_ext, suffix, test_pat, feat_dim, ker_type, cross, open_pool)
+function calker_main(proj_name, exp_id, feature_ext, suffix, test_pat, randim, open_pool, feat_dim, ker_type, cross)
 
 addpath('/net/per900a/raid0/plsang/tools/kaori-secode-calker-v6/support');
 addpath('/net/per900a/raid0/plsang/tools/libsvm-3.17/matlab');
@@ -25,7 +25,7 @@ if ~exist('suffix', 'var'),
 end
 
 if ~exist('feat_dim', 'var'),
-	feat_dim = 4000;
+	feat_dim = 10000;
 end
 
 if ~exist('ker_type', 'var'),
@@ -56,6 +56,8 @@ ker.dev_pat = 'dev';
 ker.test_pat = test_pat;
 %ker.test_pat = 'medtest';
 
+ker.randim = randim;
+
 calker_exp_dir = sprintf('%s/%s/experiments/%s-calker/%s%s', ker.proj_dir, proj_name, exp_name, ker.feat, ker.suffix);
 ker.log_dir = fullfile(calker_exp_dir, 'log');
  
@@ -78,13 +80,15 @@ calker_create_traindb(proj_name, exp_name, ker);
 
 %open pool
 if matlabpool('size') == 0 && open_pool > 0, matlabpool(open_pool); end;
-calker_cal_train_kernel(proj_name, exp_name, ker);
-calker_train_kernel(proj_name, exp_name, ker, events);
-calker_cal_test_kernel(proj_name, exp_name, ker);
-calker_test_kernel(proj_name, exp_name, ker, events);
-calker_cal_map(proj_name, exp_name, ker, events, videolevel);
+%calker_cal_train_kernel(proj_name, exp_name, ker);
+calker_cal_train_random_kernel(proj_name, exp_name, ker);
+%calker_train_kernel(proj_name, exp_name, ker, events);
+calker_train_random_kernel(proj_name, exp_name, ker, events);
+%calker_cal_test_kernel(proj_name, exp_name, ker);
+%calker_test_kernel(proj_name, exp_name, ker, events);
+%calker_cal_map(proj_name, exp_name, ker, events, videolevel);
 
-calker_cal_rank(proj_name, exp_name, ker, events)
+%calker_cal_rank(proj_name, exp_name, ker, events)
 
 %calker_val_kernel(proj_name, exp_name, ker, events);
 %calker_val_map(proj_name, exp_name, ker, events, videolevel);

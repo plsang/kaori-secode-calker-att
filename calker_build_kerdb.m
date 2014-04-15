@@ -24,6 +24,7 @@ ker.testname = [feature_ext '.test.' ker_type];
 ker.descname = [feature_ext '.desc.' ker_type];
 ker.feature_scale = 0;
 ker.chunk_size = 100;  % number of samples per each test chunk
+ker.numrand = 1;
 
 ker.cross = 1; % whether to do cross validation or not
 if exist('cross', 'var'),
