@@ -42,9 +42,10 @@ function calker_test_random_kernel(proj_name, exp_name, ker, events)
 		
 		scorePath = sprintf('%s/r-scores/%d/%s/%s.r%d.scores.mat', calker_exp_dir, ker.randim, ker.test_pat, ker.name, rr);
 		
-		%if checkFile(scorePath), 
-		%	error('Skipped testing %s \n', scorePath);
-		%end;
+		if checkFile(scorePath), 
+			fprintf('Skipped testing %s \n', scorePath);
+			continue;
+		end
 		
 		models = struct;
 		scores = struct;
@@ -105,6 +106,12 @@ function calker_test_random_kernel(proj_name, exp_name, ker, events)
 			
 		%saving scores
 		fprintf('\tSaving scores ''%s''.\n', scorePath) ;
+		
+		output_score_dir = fileparts(scorePath);
+		if ~exist(output_score_dir, 'file'),
+			mkdir(output_score_dir);
+		end
+		
 		ssave(scorePath, '-STRUCT', 'scores') ;
 		
 		%fprintf('\tCalculating maps ''%s''.\n', scorePath) ;

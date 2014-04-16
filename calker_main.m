@@ -92,6 +92,7 @@ calker_test_random_kernel(proj_name, exp_name, ker, events);
 calker_cal_random_map(proj_name, exp_name, ker, events, videolevel);
 
 %calker_cal_rank(proj_name, exp_name, ker, events)
+calker_cal_random_rank(proj_name, exp_name, ker, events);
 
 %calker_val_kernel(proj_name, exp_name, ker, events);
 %calker_val_map(proj_name, exp_name, ker, events, videolevel);
